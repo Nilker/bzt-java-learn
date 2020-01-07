@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <!--Spring Boot 2.2.x版本目前可能不支持，因此使用时最好使用2.1.x ，本文所使用Spring Boot版本 2.1.8.RELEASE。-->
+        <version>2.1.11.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.eastfair</groupId>
+    <artifactId>bztapi</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>bzt-spring-api</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!--idea的springboot修改代码无需重启（热部署）-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--<exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>-->
+        </dependency>
+        <!--引入其他的Servlet容器-->
+       <!-- <dependency>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--&lt;!&ndash;springdoc-openapi 为我们的API生成标准的 OpenAPI 3 文档&ndash;&gt;
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-core</artifactId>
+            <version>1.1.39</version>
+        </dependency>
+
+        &lt;!&ndash;除了自己生成OpenAPI 3规范外，我们还可以将springdoc-openapi与Swagger UI集成在一起&ndash;&gt;
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.1.39</version>
+        </dependency>-->
+
+        <!--swagger核心引入-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <!--swagger-ui引入-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!--sqlServer依赖 jar  参考：https://www.cnblogs.com/zdyang/p/mybaits.html -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId><!--sqlserver依赖  驱动jar-->
+            <scope>runtime</scope>
+            <version>6.4.0.jre8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId><!--mybatis 依赖-->
+            <version>2.1.0</version>
+        </dependency>
+
+        <!-- 连接池：：：https://www.jianshu.com/p/ee00f7604c02?from=groupmessage-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.17</version>
+        </dependency>
+        <!--mybatis-generator 自动生成mapper以及实体类  https://blog.csdn.net/sinat_19671783/article/details/89331581-->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.7</version>
+        </dependency>
+
+        <!--分页springboot + mybatis分页插件pagehelper-->
+       <!-- <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.12</version>
+        </dependency>-->
+        <!--Mybatis plus https://mp.baomidou.com/guide/install.html-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.29</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--自己创建的Starter-->
+        <dependency>
+            <groupId>com.siyuyou.customstarter</groupId>
+            <artifactId>siyuyou-spring-boot-starter</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+            <!--mybatis-generator 自动生成mapper以及实体类-->
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.7</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                    <configurationFile>src/main/resources/configs/generatorConfig.xml</configurationFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
