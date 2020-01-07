@@ -158,6 +158,28 @@
             <artifactId>siyuyou-spring-boot-starter</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <!--cache依赖-->
+       <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>-->
+        <!-- springboot redis依赖  https://juejin.im/post/5c9a1a43e51d4510d641fce9  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>

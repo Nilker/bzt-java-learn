@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.util.ClassUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 @ApiModel(description = "响应对象")
-public class JsonFlag<T> {
+public class JsonFlag<T> implements Serializable {
     @ApiModelProperty(value = "响应码", name = "code", required = true)
     private int code;
 

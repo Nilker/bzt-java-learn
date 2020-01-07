@@ -4,6 +4,9 @@ import com.eastfair.bztapi.model.JsonFlag;
 import com.eastfair.bztapi.model.ResultCodeEnum;
 import com.eastfair.bztapi.service.IAppPushInfoService;
 import com.eastfair.bztapi.entity.AppPushInfoEntity;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.swagger.annotations.Api;
@@ -53,9 +56,23 @@ public class AppPushInfoController extends BaseController {
     */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/getById")
+    @Cacheable(value = "appPush",key = "#pkid")
     public JsonFlag<AppPushInfoEntity> getById(@RequestParam("pkid") String pkid){
         AppPushInfoEntity model = appPushInfoService.getById(pkid);
         return new JsonFlag<AppPushInfoEntity>(model);
+    }
+
+    /**
+     * 删除一个缓存
+     *
+     * @param userId
+     * @return
+     */
+    @ApiOperation(value = "删除缓存")
+    @GetMapping(value = "/delete-appPush")
+    @CacheEvict("appPush")
+    public String deleteUser(@RequestParam(required = true) String userId) {
+        return "删除成功";
     }
 
     /**

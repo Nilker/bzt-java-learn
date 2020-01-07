@@ -3,6 +3,8 @@ package com.eastfair.bztapi.entity;
 import com.eastfair.bztapi.common.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
+import java.io.Serializable;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -25,7 +27,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("AppPushInfo")
 @ApiModel(value="AppPushInfoEntity对象", description="消息推送")
-public class AppPushInfoEntity extends BaseEntity {
+public class AppPushInfoEntity extends BaseEntity implements Serializable {
 
 private static final long serialVersionUID = 1L;
 
