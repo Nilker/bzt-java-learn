@@ -23,8 +23,8 @@ public class HelloController {
     @ApiOperation("返回配置siyuyou.hello 的相关信息")
     @GetMapping("/ttt")
     @Cacheable("hello")
-    public JsonFlag<AppPushInfoEntity> getById(@RequestParam("pkid") String pkid){
-        AppPushInfoEntity model = appPushInfoService.getById(pkid);
-        return new JsonFlag<AppPushInfoEntity>(model);
+    public JsonFlag<String> getById(@RequestParam("pkid") String pkid){
+        String s = helloService.sayHello();
+        return new JsonFlag<String>(s);
     }
 }

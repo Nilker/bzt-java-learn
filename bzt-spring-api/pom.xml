@@ -160,10 +160,10 @@
         </dependency>
 
         <!--cache依赖-->
-       <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>-->
+        </dependency>
         <!-- springboot redis依赖  https://juejin.im/post/5c9a1a43e51d4510d641fce9  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -2,8 +2,8 @@ package com.eastfair.bztapi.controller;
 
 import com.eastfair.bztapi.model.JsonFlag;
 import com.eastfair.bztapi.model.ResultCodeEnum;
-import com.eastfair.bztapi.service.IAppPushInfoService;
-import com.eastfair.bztapi.entity.AppPushInfoEntity;
+import com.eastfair.bztapi.service.IDepartmentService;
+import com.eastfair.bztapi.entity.DepartmentEntity;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,33 +21,33 @@ import com.eastfair.bztapi.common.BaseController;
 
 /**
 * <p>
-    * 消息推送 前端控制器
+    *  前端控制器
     * </p>
 *
 * @author lhl
-* @since 2019-12-31
+* @since 2020-01-09
 * @version v1.0
 */
-@Api(tags = {"消息推送"})
+@Api(tags = {""})
 @RestController
-@RequestMapping("/bztapi/app-push-info-entity")
-public class AppPushInfoController extends BaseController {
+@RequestMapping("/bztapi/department-entity")
+public class DepartmentController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private IAppPushInfoService appPushInfoService;
+    private IDepartmentService departmentService;
 
     /**
     * 查询分页数据
     */
     @ApiOperation(value = "查询分页数据")
     @GetMapping(value = "/list")
-    public JsonFlag<IPage<AppPushInfoEntity>> findListByPage(@RequestParam(name = "pageNum", defaultValue = "1") int pageNum,@RequestParam(name = "pageSize", defaultValue = "20") int pageSize){
+    public JsonFlag<IPage<DepartmentEntity>> findListByPage(@RequestParam(name = "pageNum", defaultValue = "1") int pageNum,@RequestParam(name = "pageSize", defaultValue = "20") int pageSize){
         //TODO obj类型自行修改
-        Page<AppPushInfoEntity> pageParam = new Page<>(pageNum, pageSize); // 当前页码，每页条数
-        IPage<AppPushInfoEntity> models = appPushInfoService.page(pageParam);
-        return new JsonFlag<IPage<AppPushInfoEntity>>(models);
+        Page<DepartmentEntity> pageParam = new Page<>(pageNum, pageSize); // 当前页码，每页条数
+        IPage<DepartmentEntity> models = departmentService.page(pageParam);
+        return new JsonFlag<IPage<DepartmentEntity>>(models);
      }
 
 
@@ -56,21 +56,10 @@ public class AppPushInfoController extends BaseController {
     */
     @ApiOperation(value = "根据id查询数据")
     @GetMapping(value = "/getById")
-    public JsonFlag<AppPushInfoEntity> getById(@RequestParam("pkid") String pkid){
-        AppPushInfoEntity model = appPushInfoService.getById(pkid);
-        return new JsonFlag<AppPushInfoEntity>(model);
-    }
-
-    /**
-     * 删除一个缓存
-     *
-     * @param userId
-     * @return
-     */
-    @ApiOperation(value = "删除缓存")
-    @GetMapping(value = "/delete-appPush")
-    public String deleteUser(@RequestParam(required = true) String userId) {
-        return "删除成功";
+    @Cacheable(value = "depart",key = "#pkid")
+    public JsonFlag<DepartmentEntity> getById(@RequestParam("pkid") String pkid){
+        DepartmentEntity model = departmentService.getById(pkid);
+        return new JsonFlag<DepartmentEntity>(model);
     }
 
     /**
@@ -78,9 +67,9 @@ public class AppPushInfoController extends BaseController {
     */
     @ApiOperation(value = "新增数据")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public JsonFlag<AppPushInfoEntity> save(@RequestBody AppPushInfoEntity appPushInfoEntity){
+    public JsonFlag<DepartmentEntity> save(@RequestBody DepartmentEntity departmentEntity){
         // TODO obj类型自行修改
-        boolean b =  appPushInfoService.save(appPushInfoEntity);
+        boolean b =  departmentService.save(departmentEntity);
         return new JsonFlag(ResultCodeEnum.SUCCESS);
     }
 
@@ -89,8 +78,9 @@ public class AppPushInfoController extends BaseController {
     */
     @ApiOperation(value = "删除数据")
     @GetMapping(value = "/del")
+    @CacheEvict(value = "depart",key = "#ids.")
     public JsonFlag delete(@RequestParam("ids") List<String> ids){
-        boolean b = appPushInfoService.removeByIds(ids);
+        boolean b = departmentService.removeByIds(ids);
         return new JsonFlag(ResultCodeEnum.SUCCESS);
     }
 
@@ -99,10 +89,11 @@ public class AppPushInfoController extends BaseController {
     */
     @ApiOperation(value = "更新数据")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public JsonFlag<AppPushInfoEntity> update(@RequestBody AppPushInfoEntity appPushInfoEntity){
+    @CachePut(value = "depart",key = "#departmentEntity.id")
+    public JsonFlag<DepartmentEntity> update(@RequestBody DepartmentEntity departmentEntity){
         // TODO obj类型自行修改
-        boolean b =  appPushInfoService.updateById(appPushInfoEntity);
-        return new JsonFlag(ResultCodeEnum.SUCCESS);
+        boolean b =  departmentService.updateById(departmentEntity);
+        return new JsonFlag(departmentEntity);
     }
 
 }

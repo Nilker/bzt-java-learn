@@ -42,7 +42,7 @@ public class CodeGenerator {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = System.getProperty("user.dir")+"/bzt-spring-api";//聚合项目 有不同的模块
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setFileOverride(true);              //是否覆蓋已有文件 默认值：false
         gc.setAuthor("lhl");                    //作者
@@ -63,15 +63,15 @@ public class CodeGenerator {
         // 数据源配置
         com.baomidou.mybatisplus.generator.config.DataSourceConfig dsc = new com.baomidou.mybatisplus.generator.config.DataSourceConfig();
         //dsc.setDbType(DbType.SQL_SERVER);
-        dsc.setUrl("jdbc:sqlserver://127.0.0.1:1433;DatabaseName=test");
-        dsc.setDriverName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dsc.setUsername("sa");
-        dsc.setPassword("123");
+        //dsc.setUrl("jdbc:sqlserver://127.0.0.1:1433;DatabaseName=test");
+        //dsc.setDriverName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        //dsc.setUsername("sa");
+        //dsc.setPassword("123");
 
-        //dsc.setUrl("jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false");
-        //dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        //dsc.setUsername("root");
-        //dsc.setPassword("root");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setUsername("root");
+        dsc.setPassword("root");
 
         mpg.setDataSource(dsc);
 
@@ -104,18 +104,17 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/sqlserver" //+ pc.getModuleName()
+                return projectPath + "/src/main/resources/mapper" //+ pc.getModuleName()
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
-       /* focList.add(new FileOutConfig("/templates/mapper.java.ftl") {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/java/com/eastfair/bztapi/mapper/mysql" //+ pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_JAVA;
-            }
-        });*/
+//        focList.add(new FileOutConfig("/templates/mapper.java.ftl") {
+//            @Override
+//            public String outputFile(TableInfo tableInfo) {
+//                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+//                return projectPath + "/src/main/java/com/eastfair/bztapi/mapper/mysql/" + tableInfo.getMapperName() + StringPool.DOT_JAVA;
+//            }
+//        });
         /*
         cfg.setFileCreate(new IFileCreate() {
             @Override
@@ -152,7 +151,7 @@ public class CodeGenerator {
         strategy.setRestControllerStyle(true);                                          //生成 @RestController 控制器
         strategy.setSuperControllerClass("com.eastfair.bztapi.common.BaseController");  //自定义继承的Controller类全称，带包名
         // 写于父类中的公共字段isCapitalMode
-        strategy.setSuperEntityColumns("id");
+        //strategy.setSuperEntityColumns("id");                                         //表实体Id字段，使用父类的
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         //strategy.setInclude(new String[] { "user" });                                 // 需要生成的表可以多张表
         //strategy.setExclude(new String[]{"test"});                                    // 排除生成的表

@@ -17,6 +17,8 @@ public class JsonFlag<T> implements Serializable {
     @ApiModelProperty(value = "响应数据", name = "data")
     private T data;
 
+    public JsonFlag() {
+    }
 
     /**
      *
