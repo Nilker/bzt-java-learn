@@ -186,6 +186,12 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+        <!--消息中间件 amqp   rabbitmq rocketmq  https://juejin.im/post/5cda63fae51d45475b17e3a2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
