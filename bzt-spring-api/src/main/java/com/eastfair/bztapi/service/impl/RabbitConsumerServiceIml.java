@@ -20,13 +20,13 @@ public class RabbitConsumerServiceIml implements IRabbitConsumerService {
     }
 
     @Override
-    @RabbitListener(queues = "routingQueueC")
+    @RabbitListener(queues = "directQueueC")
     public void consumerDirectC(String message) {
         System.out.println("消费者收到队列C中的消息:" + message);
     }
 
     @Override
-    @RabbitListener(queues = "routingQueueD")
+    @RabbitListener(queues = "directQueueD")
     public void consumerDirectD(String message) {
         System.out.println("消费者收到队列D中的消息:" + message);
     }
